@@ -1,11 +1,12 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_note, only: %i[show edit update destroy]
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = current_user.notes
   end
 
   # GET /notes/1
@@ -15,7 +16,7 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = Note.new
+    @note = current_user.notes.new
   end
 
   # GET /notes/1/edit
