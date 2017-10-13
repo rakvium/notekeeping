@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Tagged notes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= 0 %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tag', new_tag_path %>

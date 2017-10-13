@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013124545) do
+ActiveRecord::Schema.define(version: 20171013225500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20171013124545) do
     t.index ["note_id"], name: "index_sharings_on_note_id"
     t.index ["recipient_id"], name: "index_sharings_on_recipient_id"
     t.index ["sender_id"], name: "index_sharings_on_sender_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|

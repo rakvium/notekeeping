@@ -19,6 +19,7 @@ class Ability
     can :manage,
         Sharing,
         note_id: [nil] + user.notes.ids + Sharing.where(recipient_id: user.id).where(permission: 'owner').pluck(:note_id)
+    can :manage, Tag
 
     # The first argument to `can` is the action you are giving the user
     # permission to do.
