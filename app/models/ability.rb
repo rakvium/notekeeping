@@ -5,10 +5,18 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-    user ||= current_user
+    user ||= User.new
     alias_action :create, :read, :update, :destroy, to: :crud
 
     can :crud, Note, user_id: user.id
+    can :read, user.received_notes
+    can :update,
+        Note,
+        id: Sharing.where(recipient_id: user.id).where.not(permission: 'reader').pluck(:note_id)
+    can :destroy,
+        Note,
+        id: Sharing.where(recipient_id: user.id).where(permission: 'owner').pluck(:note_id)
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
