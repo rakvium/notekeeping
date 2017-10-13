@@ -1,0 +1,11 @@
+<p>
+  <strong>Shared by:</strong>
+  <%= @sharing.sender_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @sharing.recipient_id %>
+</p>
+
+<%= link_to 'Back', note_sharings_path(@sharing.note_id) %>

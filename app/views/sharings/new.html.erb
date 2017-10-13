@@ -1,0 +1,5 @@
+<h1>Sharing note <% @sharing.note_id %> to other user</h1>
+
+<%= render 'form', sharing: @sharing, note_id: @sharing.note_id %>
+
+<%= link_to 'Back', note_sharings_path(@sharing.note_id) %>

@@ -5,6 +5,10 @@ class Sharing < ApplicationRecord
 
   # prevent circular dependency
   validates :recipient_id, uniqueness: { scope: :note_id }
+  validate :not_creator
+  def not_creator
+    errors.add(:recipient_id, 'cannot be the creator') if recipient_id == note.try(:user_id)
+  end
 
   enum permission: {
     owner: 'owner',

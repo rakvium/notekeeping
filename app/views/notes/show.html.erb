@@ -8,5 +8,10 @@
   <%= @note.user.id %>
 </p>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+<ul>
+  <li><%= link_to 'Edit', edit_note_path(@note) %></li>
+  <li><%= link_to 'Back', notes_path %></li>
+  <% if can?(:manage, Sharing, note_id: @note.id) %>
+    <li><%= link_to 'Sharing settings', note_sharings_path(note_id: @note.id) %></li>
+  <% end %>
+</ul>

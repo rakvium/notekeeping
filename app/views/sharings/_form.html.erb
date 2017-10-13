@@ -1,0 +1,27 @@
+<%= form_with(model: [sharing.note, sharing], local: true) do |form| %>
+  <% if sharing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sharing.errors.count, "error") %> prohibited you from sharing this note:</h2>
+
+      <ul>
+      <% sharing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :recipient_id %>
+    <%= form.select :recipient_id, User.ids %>
+  </div>
+
+  <div class="field">
+    <%= form.label :permission %>
+    <%= form.select :permission, Sharing.permissions.values %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
