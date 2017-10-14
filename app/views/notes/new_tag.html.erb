@@ -1,0 +1,15 @@
+<% if @used_tags %>
+  <%= content_tag(:p, 'This note is already tagged with:') %>
+  <% @used_tags.each do |used_tag| %>
+    <%= content_tag(:p) do %>
+      <%= link_to used_tag.name, tag_path(used_tag) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= form_tag add_tag_note_path(@note) do %>
+  Tag: <%= select_tag 'tag_id', options_from_collection_for_select(@tags, "id", "name") %>
+  <%= submit_tag 'Add tag' %>
+<% end %>
+
+<%= link_to 'Missing a tag? Create a new one!', new_tag_path %>

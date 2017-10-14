@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013225500) do
+ActiveRecord::Schema.define(version: 20171013232605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "note_tags", force: :cascade do |t|
+    t.bigint "note_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_note_tags_on_note_id"
+    t.index ["tag_id"], name: "index_note_tags_on_tag_id"
+  end
 
   create_table "notes", force: :cascade do |t|
     t.text "text", null: false
@@ -58,6 +67,8 @@ ActiveRecord::Schema.define(version: 20171013225500) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "note_tags", "notes"
+  add_foreign_key "note_tags", "tags"
   add_foreign_key "notes", "users"
   add_foreign_key "sharings", "notes"
   add_foreign_key "sharings", "users", column: "recipient_id"

@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_note, only: %i[show edit update destroy]
+  before_action :set_note, only: %i[show edit update destroy new_tag add_tag]
 
   # GET /notes
   # GET /notes.json
@@ -60,6 +60,20 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def new_tag
+    @tags = Tag.all
+    @used_tags = @note.tags
+  end
+
+  def add_tag
+    @note_tag = NoteTag.new(note: @note, tag_id: params[:tag_id])
+    if @note_tag.save
+      redirect_to @note, notice: 'Tagged!'
+    else
+      redirect_to @note, alert: 'Not tagged!'
     end
   end
 

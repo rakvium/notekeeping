@@ -13,8 +13,8 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= tag.name %></td>
-        <td><%= 0 %></td>
+        <td><%= link_to tag.name, tag_path(tag) %></td>
+        <td><%= tag.note_tags.size %></td>
       </tr>
     <% end %>
   </tbody>

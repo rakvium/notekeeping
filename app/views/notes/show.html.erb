@@ -14,4 +14,7 @@
   <% if can?(:manage, Sharing, note_id: @note.id) %>
     <li><%= link_to 'Sharing settings', note_sharings_path(note_id: @note.id) %></li>
   <% end %>
+  <% if can?(:manage, @note) %>
+    <li><%= link_to 'Add tag', new_tag_note_path(@note) %></li>
+  <% end %>
 </ul>

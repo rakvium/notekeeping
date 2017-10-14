@@ -6,9 +6,7 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new
-    alias_action :create, :read, :update, :destroy, to: :crud
-
-    can :crud, Note, user_id: user.id
+    can :manage, Note, user_id: user.id
     can :read, user.received_notes
     can :update,
         Note,

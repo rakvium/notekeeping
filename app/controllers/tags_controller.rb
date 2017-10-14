@@ -5,12 +5,13 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    @tags = Tag.all.preload(:note_tags)
   end
 
   # GET /tags/1
   # GET /tags/1.json
   def show
+    @notes_count = @tag.notes.count
   end
 
   # GET /tags/new
