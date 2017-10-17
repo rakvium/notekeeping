@@ -1,15 +1,30 @@
-<% if @used_tags %>
-  <%= content_tag(:p, 'This note is already tagged with:') %>
-  <% @used_tags.each do |used_tag| %>
-    <%= content_tag(:p) do %>
-      <%= link_to used_tag.name, tag_path(used_tag) %>
-    <% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= content_tag(:h4, "Note ##{params[:id]} tags") %>
+  </div>
+
+  <% if @used_tags %>
+    <div class="form-group col-md-12">
+      <%= content_tag(:span, "This note is already tagged with:") %>
+      <% @used_tags.each do |used_tag| %>
+        <%= link_to "##{used_tag.name}", tag_path(used_tag), class: 'btn btn-default btn-xs' %>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
 
-<%= form_tag add_tag_note_path(@note) do %>
-  Tag: <%= select_tag 'tag_id', options_from_collection_for_select(@tags, "id", "name") %>
-  <%= submit_tag 'Add tag' %>
-<% end %>
+  <%= form_tag add_tag_note_path(@note) do %>
+    <div class="form-group col-md-12">
+      <%= label_tag 'tag_id', 'Tag it with:' %>
+      <%= select_tag 'tag_id', options_from_collection_for_select(@tags - @used_tags, "id", "name"), class: 'form-input' %>
+      <%= submit_tag 'Tag!', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 
-<%= link_to 'Missing a tag? Create a new one!', new_tag_path %>
+  <div class="form-group col-md-12">
+    <%= link_to 'Missing a tag? Create a new one!', new_tag_path, class: 'btn btn-info btn-xs' %>
+  </div>
+
+  <div class="panel-footer col">
+    <%= link_to 'Back to note', tag.note, class: 'btn btn-default btn-xs' %>
+  </div>
+</div>

@@ -73,7 +73,7 @@ class NotesController < ApplicationController
     if @note_tag.save
       redirect_to @note, notice: 'Tagged!'
     else
-      redirect_to @note, alert: 'Not tagged!'
+      redirect_to new_tag_note_path(@note), alert: 'Choose a new tag!'
     end
   end
 

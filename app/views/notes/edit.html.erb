@@ -1,6 +1,8 @@
-<h1>Editing Note</h1>
-
-<%= render 'form', note: @note %>
-
+<div class="panel panel-default devise-bs">
+  <div class="panel-heading">
+    <h1>Editing Note</h1>
+  </div>
+  <%= render 'form', note: @note %>
+</div>
 <%= link_to 'Show', @note %> |
 <%= link_to 'Back', notes_path %>
