@@ -33,8 +33,8 @@
       </div>
     </nav>
     <div class="container">
-      <%= content_tag(:p, notice, class: 'notice') if notice %>
-      <%= content_tag(:p, alert, class: 'alert') if alert %>
+      <%= content_tag(:p, notice, class: 'alert alert-info') if notice %>
+      <%= content_tag(:p, alert, class: 'alert alert-danger') if alert %>
       <%= yield %>
     </div>
   </body>
