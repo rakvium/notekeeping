@@ -1,5 +1,9 @@
-<h1>Editing sharing</h1>
-
-<%= render 'form', sharing: @sharing, note_id: @sharing.note_id %>
-
-<%= link_to 'Back', note_sharings_path(@sharing.note_id) %>
+<div class="panel panel-default devise-bs">
+  <div class="panel-heading">
+    <h1>Editing sharing</h1>
+  </div>
+  <%= render 'form', sharing: @sharing, note_id: @sharing.note_id %>
+  <div class="panel-footer">
+    <%= link_to 'Sharing settings', note_sharings_path(@sharing.note_id), class: 'btn btn-default' %>
+  </div>
+</div>

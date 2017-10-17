@@ -49,7 +49,7 @@ class SharingsController < ApplicationController
   end
 
   def sharing_params
-    params.require(:sharing).permit(:recipient_id).merge(
+    params.require(:sharing).permit(:recipient_id, :permission).merge(
       sender_id: current_user.id,
       note_id: params[:note_id]
     )

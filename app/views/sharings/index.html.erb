@@ -1,12 +1,12 @@
 <h1>Sharings for note #<%= params[:note_id] %></h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Shared by</th>
       <th>Shared to</th>
       <th>Permission</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -16,14 +16,17 @@
         <td><%= sharing.sender_id %></td>
         <td><%= sharing.recipient_id %></td>
         <td><%= sharing.permission %></td>
-        <td><%= link_to 'Show', note_sharing_path(note_id: sharing.note_id, id: sharing.id) %></td>
-        <td><%= link_to('Edit', edit_note_sharing_path(note_id: sharing.note_id, id: sharing.id)) %></td>
-        <td><%= link_to('Destroy', note_sharing_path(note_id: sharing.note_id, id: sharing.id), method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+        <td>
+          <%= link_to 'Show', note_sharing_path(note_id: sharing.note_id, id: sharing.id), class: 'btn btn-info' %>
+          <%= link_to('Edit', edit_note_sharing_path(note_id: sharing.note_id, id: sharing.id), class: 'btn btn-default') %>
+          <%= link_to('Destroy', note_sharing_path(note_id: sharing.note_id, id: sharing.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger') %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'Share to another user', new_note_sharing_path(note_id: params[:note_id]) %>
+<div class="row">
+  <%= link_to 'Share with another user', new_note_sharing_path(note_id: params[:note_id]), class: 'btn btn-primary btn-lg' %>
+  <%= link_to 'Back to the note', notes_path(params[:note_id]), class: 'btn btn-default btn-lg' %>
+</div>

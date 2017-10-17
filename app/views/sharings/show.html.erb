@@ -1,11 +1,17 @@
-<p>
-  <strong>Shared by:</strong>
-  <%= @sharing.sender_id %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Shared by:</strong>
+    <%= @sharing.sender_id %>
+  </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @sharing.recipient_id %>
-</p>
+  <div class="panel-body">
+    <%= "Shared with user #{@sharing.recipient_id} with #{@sharing.permission} permissions" %>
+  </div>
 
-<%= link_to 'Back', note_sharings_path(@sharing.note_id) %>
+  <div class="panel-footer">
+    <%= link_to('Change permissions', edit_note_sharing_path(note_id: @sharing.note_id, id: @sharing.id), class: 'btn btn-primary') %>
+    <%= link_to('Unshare', note_sharing_path(note_id: @sharing.note_id, id: @sharing.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger') %>
+  </div>
+</div>
+
+<%= link_to 'Back', note_sharings_path(@sharing.note_id), class: 'btn btn-default' %>
